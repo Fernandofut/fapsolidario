@@ -1,0 +1,68 @@
+/* Configurações gerais de corpo */
+body {
+    background-color: #6ad1f0d8; /* Um cinza bem clarinho para o fundo */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Painel centralizado */
+.painel-doacao {
+    background-color: #1389ACd8; /* Fundo branco para o painel */
+    padding: 90px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    text-align: center;
+    width: 400px;
+}
+
+h1 {
+    color: #e4e00f;
+    margin-bottom: 10px;
+}
+
+p {
+    color: #e4e00f;
+    margin-bottom: 30px;
+}
+
+/* Container dos botões em coluna */
+.lista-opcoes {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Espaço entre os botões */
+}
+
+/* Estilo dos botões de doação */
+.botao-item {
+    background-color: #007bff; /* Azul padrão */
+    color: rgb(243, 239, 18);
+    border: none;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 23px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Deixa a mudança de cor suave */
+}
+
+/* Efeito ao passar o mouse no botão */
+.botao-item:hover {
+    background-color: #0056b3; /* Azul mais escuro */
+}
+
+/* Estilo do link de voltar */
+.link-voltar {
+    display: block;
+    margin-top: 25px;
+    color: #e4e00f;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.link-voltar:hover {
+    text-decoration: underline;
+}
