@@ -1,0 +1,105 @@
+/* Reset padrão para evitar espaços indesejados */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+/* Fundo da página e alinhamento central */
+body {
+    background-color: #87CEEB; /* Azul céu */
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.container-roupas {
+    width: 100%;
+    max-width: 550px;
+    text-align: center; /* Centraliza o título e o botão */
+}
+
+/* Estilo do Título "Pílula" Amarela */
+.header-titulo {
+    background-color: #5BBD5E; /* Amarelo */
+    color: #e4e00f;           /* Azul escuro */
+    padding: 15px 40px;
+    border-radius: 50px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: inline-block;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    text-transform: uppercase;
+}
+
+/* Estilo dos Cards Brancos */
+.card-ong {
+    background: #1389ACd8;
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease;
+}
+
+.card-ong:hover {
+    transform: translateY(-5px); /* Efeito de flutuar */
+}
+
+.ong-nome {
+    color: #333;
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+}
+
+.ong-contato {
+    color: #e4e00f; /* Verde */
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    display: block;
+}
+
+/* Caixa onde o Mapa fica dentro */
+.mapa-box {
+    border: 2px solid #0056b3;
+    border-radius: 15px;
+    overflow: hidden; /* Faz o mapa seguir o arredondamento */
+}
+
+.mapa-label {
+    display: block;
+    background: #0056b3;
+    padding: 8px;
+    font-size: 11px;
+    color: #e4e00f;
+    font-weight: bold;
+    border-bottom: 1px solid #0056b3;
+}
+
+/* Garante que o iframe ocupe todo o espaço do card */
+iframe {
+    display: block;
+    width: 100%;
+    border: none;
+}
+
+/* Botão Voltar Amarelo */
+.botao-voltar {
+    background-color: #5BBD5E;
+    color: #e4e00f;
+    border: none;
+    padding: 12px 60px;
+    border-radius: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s;
+}
+
+.botao-voltar:hover {
+    background-color: #5BBD5E;
+    transform: scale(1.05);
+}
