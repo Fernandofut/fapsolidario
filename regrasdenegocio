@@ -1,0 +1,8 @@
+📜 5. Regras de Negócio (Business Rules)
+Políticas e restrições que regem o funcionamento do site.
+
+RN01 - Validação de Identidade (KYC): O repasse de valores para beneficiários só deve ocorrer após a validação de documentos de identidade (CPF/CNPJ) e dados bancários correspondentes, para evitar fraudes.
+
+RN02 - Taxa de Manutenção: Caso a plataforma retenha uma porcentagem para custos operacionais, essa taxa (ex: 5%) deve ser informada de forma clara e transparente na tela de checkout da doação.
+
+RN03 - Prazo de Repasse: Os saques solicitados pelos beneficiários devem ter um prazo estipulado (ex: D+3 ou D+14, dependendo do método de pagamento utilizado pelo doador) para serem creditados em conta.
