@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>FAP Solidário - Menu do Doador</title>
+        <link rel="stylesheet" href="/assets/css/style_home.css" />
+    </head>
+    <body>
+        <div class="main-container">
+            <section class="lado-esquerdo">
+                <div class="logo-container">
+                    <img src="/assets/img/fap.jpeg" alt="FAP Solidário Logo" class="logo-img" />
+                </div>
+            </section>
+
+            <section class="lado-direito">
+                <div class="menu-botoes">
+                    <p class="boas-vindas" id="boas-vindas">Bem-vindo(a)!</p>
+
+                    <h1 class="titulo-fap">
+                        <span class="letra-f">F</span><span class="letra-a">A</span><span class="letra-p">P</span>
+                        <br />
+                        <span class="letra-s">S</span><span class="letra-o">O</span><span class="letra-l">L</span
+                        ><span class="letra-i">I</span><span class="letra-d">D</span><span class="letra-a">Á</span
+                        ><span class="letra-r">R</span><span class="letra-i">I</span><span class="letra-o">O</span>
+                    </h1>
+
+                    <a href="/pages/doar.html" class="btn-gradiente">FAZER DOACOES</a>
+
+                    <a href="/pages/estoque.html" class="btn-gradiente">ESTOQUE DE DOACOES</a>
+
+                    <a href="/pages/dashboard.html" class="btn-gradiente">DASHBOARD</a>
+
+                    <a href="/pages/informacoes.html" class="btn-gradiente">MAIS INFORMACOES</a>
+
+                    <hr class="divisor" />
+
+                    <a
+                        href="#"
+                        onclick="
+                            FAP.sair();
+                            return false;
+                        "
+                        class="btn-sair"
+                        >SAIR DA CONTA</a
+                    >
+                </div>
+            </section>
+        </div>
+
+        <script src="/assets/js/api.js"></script>
+        <script>
+            fetch('/api/auth/sessao')
+                .then((r) => (r.ok ? r.json() : Promise.reject()))
+                .then((sessao) => {
+                    document.getElementById('boas-vindas').textContent =
+                        'Olá, ' + sessao.nome + ' (' + sessao.tipo + ') - Área do doador';
+                })
+                .catch(() => {
+                    window.location.href = '/index.html';
+                });
+        </script>
+    </body>
+</html>

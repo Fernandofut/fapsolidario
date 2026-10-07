@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>FAP Solidário - Cadastro</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            }
+
+            body {
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                padding: 20px;
+            }
+
+            .container-cadastro {
+                background: #ffffff;
+                border-radius: 16px;
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+                padding: 45px 40px;
+                width: 100%;
+                max-width: 480px;
+                text-align: center;
+            }
+
+            .titulo-cadastro {
+                font-size: 1.8rem;
+                font-weight: 800;
+                color: #333;
+                margin-bottom: 6px;
+            }
+
+            .letra-f {
+                color: #667eea;
+            }
+            .letra-a {
+                color: #764ba2;
+            }
+            .letra-p {
+                color: #f093fb;
+            }
+            .letra-s {
+                color: #6a11cb;
+            }
+            .letra-o {
+                color: #f5576c;
+            }
+            .letra-l {
+                color: #4facfe;
+            }
+            .letra-i {
+                color: #43e97b;
+            }
+            .letra-d {
+                color: #fa709a;
+            }
+            .letra-r {
+                color: #fccb90;
+            }
+
+            .subtitulo {
+                color: #888;
+                font-size: 0.9rem;
+                margin-bottom: 30px;
+            }
+
+            .campo {
+                text-align: left;
+                margin-bottom: 18px;
+            }
+
+            .campo label {
+                display: block;
+                font-size: 0.85rem;
+                font-weight: 600;
+                color: #555;
+                margin-bottom: 6px;
+            }
+
+            .campo input,
+            .campo select {
+                width: 100%;
+                padding: 13px 15px;
+                border: 2px solid #e0e0e0;
+                border-radius: 10px;
+                font-size: 1rem;
+                transition: border-color 0.3s;
+                outline: none;
+                background: #fff;
+            }
+
+            .campo input:focus,
+            .campo select:focus {
+                border-color: #667eea;
+            }
+
+            .btn-cadastrar {
+                width: 100%;
+                padding: 14px;
+                background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+                color: #fff;
+                border: none;
+                border-radius: 10px;
+                font-size: 1.05rem;
+                font-weight: 700;
+                cursor: pointer;
+                transition:
+                    transform 0.2s,
+                    opacity 0.2s;
+                margin-top: 8px;
+            }
+
+            .btn-cadastrar:hover {
+                transform: translateY(-2px);
+                opacity: 0.92;
+            }
+
+            .link-login {
+                margin-top: 22px;
+                font-size: 0.85rem;
+                color: #888;
+            }
+
+            .link-login a {
+                color: #667eea;
+                text-decoration: none;
+                font-weight: 600;
+            }
+
+            .link-login a:hover {
+                text-decoration: underline;
+            }
+
+            .dica-tipo {
+                display: block;
+                margin-top: 6px;
+                font-size: 0.78rem;
+                color: #888;
+                line-height: 1.4;
+            }
+
+            .campo select optgroup {
+                font-weight: 700;
+                color: #444;
+            }
+        </style>
+    </head>
+    <body>
+        <main class="container-cadastro">
+            <h1 class="titulo-cadastro">
+                <span class="letra-f">F</span><span class="letra-a">A</span><span class="letra-p">P</span>
+                <span class="letra-s">S</span><span class="letra-o">O</span><span class="letra-l">L</span
+                ><span class="letra-i">I</span><span class="letra-d">D</span><span class="letra-a">Á</span
+                ><span class="letra-r">R</span><span class="letra-i">I</span><span class="letra-o">O</span>
+            </h1>
+            <p class="subtitulo">Crie sua conta para doar ou receber</p>
+
+            <form id="form-cadastro">
+                <div class="campo">
+                    <label for="nome">Nome</label>
+                    <input type="text" id="nome" name="nome" placeholder="Seu nome completo" required />
+                </div>
+
+                <div class="campo">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" placeholder="seu@email.com" required />
+                </div>
+
+                <div class="campo">
+                    <label for="senha">Senha</label>
+                    <input type="password" id="senha" name="senha" placeholder="Crie uma senha" required />
+                </div>
+
+                <div class="campo">
+                    <label for="tipo">O que você quer fazer no FAP Solidário?</label>
+                    <select id="tipo" name="tipo" required>
+                        <optgroup label="Quero DOAR">
+                            <option value="Doador Comum">Doador Comum</option>
+                            <option value="Empresa">Empresa / Organização</option>
+                        </optgroup>
+                        <optgroup label="Quero RECEBER">
+                            <option value="Beneficiário">Beneficiário (receber doações)</option>
+                        </optgroup>
+                    </select>
+                    <small class="dica-tipo" id="dica-tipo"
+                        >Você poderá registrar doações de alimentos, roupas, higiene, móveis e dinheiro.</small
+                    >
+                </div>
+
+                <p id="msg-erro" style="display: none; color: #e74c3c; font-size: 0.85rem; margin-bottom: 10px"></p>
+
+                <button type="submit" class="btn-cadastrar">CADASTRAR</button>
+            </form>
+
+            <p class="link-login">Já tem uma conta? <a href="/index.html">Faça login aqui</a></p>
+        </main>
+
+        <script src="/assets/js/api.js"></script>
+        <script>
+            document.getElementById('form-cadastro').addEventListener('submit', async (evento) => {
+                evento.preventDefault();
+                const msgErro = document.getElementById('msg-erro');
+                msgErro.style.display = 'none';
+
+                try {
+                    await FAP.post('/api/auth/cadastro', {
+                        nome: document.getElementById('nome').value,
+                        email: document.getElementById('email').value,
+                        senha: document.getElementById('senha').value,
+                        tipo: document.getElementById('tipo').value
+                    });
+                    window.location.href = '/index.html';
+                } catch (erro) {
+                    msgErro.textContent = erro.message;
+                    msgErro.style.display = 'block';
+                }
+            });
+
+            const selectTipo = document.getElementById('tipo');
+            const dicaTipo = document.getElementById('dica-tipo');
+            const dicas = {
+                'Doador Comum': 'Você poderá registrar doações de alimentos, roupas, higiene, móveis e dinheiro.',
+                Empresa: 'Sua empresa aparece no ranking de doações do dashboard e no registro de estoque.',
+                Beneficiário: 'Você terá acesso às abas para solicitar doações disponíveis e acompanhar seus pedidos.'
+            };
+
+            function atualizarDica() {
+                dicaTipo.textContent = dicas[selectTipo.value] || '';
+            }
+
+            selectTipo.addEventListener('change', atualizarDica);
+            atualizarDica();
+        </script>
+    </body>
+</html>

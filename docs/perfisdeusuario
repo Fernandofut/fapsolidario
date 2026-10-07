@@ -1,0 +1,73 @@
+# Perfis de Usuário — FAP Solidário
+
+O sistema trabalha com **três tipos de conta** cadastrados em `cadastro.html`. O tipo escolhido define o **papel** do usuário (doador ou recebedor) e, consequentemente, o menu e as permissões após o login.
+
+| Tipo de conta | Papel | Quem é |
+|---------------|-------|--------|
+| Doador Comum | **doador** | Pessoa física que quer doar alimentos, roupas, higiene, móveis, itens culturais ou dinheiro. |
+| Empresa | **doador** | Organização que doa e aparece no ranking de doações do dashboard. |
+| Beneficiário | **recebedor** | Pessoa que vai **receber** as doações disponíveis no estoque. |
+
+> O valor salvo no banco é o tipo (`Comum`, `Empresa`, `Beneficiário`); o papel é derivado dele no servidor: `Beneficiário` → `recebedor`, os demais → `doador`.
+
+---
+
+## 1. Doador (Doador Comum / Empresa)
+
+**Após o login → `/pages/opcoes.html` (Menu do Doador)**
+
+| Ação | Onde |
+|------|------|
+| Fazer doações (roupas, alimentos, higiene, móveis, cultura, dinheiro) | `doar.html` → páginas de categoria com instituições, telefone e mapa |
+| Registrar doações no estoque e acompanhar validades | `estoque.html` |
+| Ver ranking de doadores e gráficos | `dashboard.html` |
+| Informações do projeto | `informacoes.html` |
+
+Restrições do perfil:
+- **Não acessa** `receber.html` (área de recebimento) — é redirecionado ao menu.
+- **Não solicita** itens do estoque — a rota `POST /api/pedidos` retorna erro para doadores.
+- `POST /api/estoque` só é aceito para este papel.
+
+---
+
+## 2. Recebedor (Beneficiário)
+
+**Após o login → `/pages/receber.html` (Painel do Recebedor)**
+
+O painel é organizado em **abas**:
+
+| Aba | Conteúdo |
+|-----|----------|
+| 🍎 Alimentos / 👕 Roupas / 🧼 Higiene / 🪑 Móveis / 📚 Cultura e Outros / 💰 Dinheiro | Itens disponíveis naquele tipo, com botão **SOLICITAR** |
+| 📋 Meus Pedidos | Histórico dos pedidos feitos pelo usuário (item, quantidade e data) |
+
+Restrições do perfil:
+- **Não acessa** `doar.html`, `estoque.html`, `dashboard.html` nem `opcoes.html` — é redirecionado ao painel do recebedor.
+- **Não registra** doações no estoque.
+- Os pedidos são gravados com o **e-mail da sessão** (não é digitado pelo usuário).
+
+---
+
+## 3. Regras de acesso (api/server.js + rotas)
+
+| Rota / Página | Doador | Recebedor | Sem login |
+|---------------|--------|-----------|-----------|
+| `opcoes.html`, `doar.html`, `roupas.html`, `alimentos.html`, `dinheiro.html`, `moveisehigiene.html`, `estoque.html`, `dashboard.html` | ✅ | ❌ → `receber.html` | ❌ → `index.html` |
+| `receber.html` | ❌ → `opcoes.html` | ✅ | ❌ → `index.html` |
+| `informacoes.html`, `menu.html`, `cadastro.html` | ✅ | ✅ | `cadastro.html` liberada; demais → `index.html` |
+| `POST /api/estoque` | ✅ | ❌ 403 | ❌ → `index.html` |
+| `POST /api/pedidos` | ❌ 403 | ✅ | ❌ 401 |
+| `GET /api/estoque`, `GET /api/dashboard` | ✅ | ✅ | ❌ 401 |
+| `GET /api/pedidos` | ❌ 403 | ✅ | ❌ 401 |
+| `GET /api/auth/sessao` | dados do usuário | dados do usuário | `401 {papel: null}` |
+
+- A sessão é criada no `POST /api/auth/login` com cookie `HttpOnly` (`sid`), válida por 8 horas, e destruída em `POST /api/auth/logout`.
+- Todas as páginas HTML (exceto `index.html` e `cadastro.html`) exigem sessão ativa.
+- O botão **VOLTAR** das páginas internas aponta para `/pages/menu.html`, que redireciona conforme o papel do usuário.
+
+## 4. Contas de teste
+
+| Perfil | E-mail | Senha |
+|--------|--------|-------|
+| Doador | `teste@fap.com` | `123456` |
+| Recebedor | `recebedor@fap.com` | `123456` |

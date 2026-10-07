@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>FAP Solidário - Receber Doações</title>
+        <style>
+            body {
+                margin: 0;
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: #1389ac;
+                font-family: 'Segoe UI', Tahoma, sans-serif;
+                color: #fff;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <p style="font-weight: 600">Abrindo a área de recebimento de doações...</p>
+            <p style="margin-top: 10px; font-size: 0.85rem; opacity: 0.85">
+                Se não for redirecionado, <a href="/pages/menu.html" style="color: #fff">clique aqui</a>.
+            </p>
+        </div>
+
+        <script src="/assets/js/api.js"></script>
+        <script>
+            fetch('/api/auth/sessao')
+                .then((r) => (r.ok ? r.json() : Promise.reject()))
+                .then((sessao) => {
+                    window.location.href = sessao.papel === 'recebedor' ? '/pages/receber.html' : '/pages/doar.html';
+                })
+                .catch(() => {
+                    window.location.href = '/index.html';
+                });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>FAP Solidário - Login</title>
+        <style>
+            /* === Reset básico === */
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            }
+
+            body {
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                padding: 20px;
+            }
+
+            /* === Cartão do formulário === */
+            .container-login {
+                background: #ffffff;
+                border-radius: 16px;
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+                padding: 45px 40px;
+                width: 100%;
+                max-width: 420px;
+                text-align: center;
+            }
+
+            .logo-login {
+                width: 90px;
+                height: 90px;
+                border-radius: 50%;
+                object-fit: cover;
+                margin-bottom: 18px;
+                border: 3px solid #667eea;
+            }
+
+            .titulo-login {
+                font-size: 2.1rem;
+                font-weight: 800;
+                letter-spacing: 1px;
+                margin-bottom: 6px;
+            }
+
+            .letra-f {
+                color: #667eea;
+            }
+            .letra-a {
+                color: #764ba2;
+            }
+            .letra-p {
+                color: #f093fb;
+            }
+            .letra-s {
+                color: #6a11cb;
+            }
+            .letra-o {
+                color: #f5576c;
+            }
+            .letra-l {
+                color: #4facfe;
+            }
+            .letra-i {
+                color: #43e97b;
+            }
+            .letra-d {
+                color: #fa709a;
+            }
+            .letra-r {
+                color: #fccb90;
+            }
+
+            .subtitulo {
+                color: #888;
+                font-size: 0.9rem;
+                margin-bottom: 30px;
+            }
+
+            /* === Campos do formulário === */
+            .campo {
+                text-align: left;
+                margin-bottom: 18px;
+            }
+
+            .campo label {
+                display: block;
+                font-size: 0.85rem;
+                font-weight: 600;
+                color: #555;
+                margin-bottom: 6px;
+            }
+
+            .campo input {
+                width: 100%;
+                padding: 13px 15px;
+                border: 2px solid #e0e0e0;
+                border-radius: 10px;
+                font-size: 1rem;
+                transition: border-color 0.3s;
+                outline: none;
+            }
+
+            .campo input:focus {
+                border-color: #667eea;
+            }
+
+            /* === Botão de envio === */
+            .btn-entrar {
+                width: 100%;
+                padding: 14px;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: #fff;
+                border: none;
+                border-radius: 10px;
+                font-size: 1.05rem;
+                font-weight: 700;
+                cursor: pointer;
+                transition:
+                    transform 0.2s,
+                    opacity 0.2s;
+                margin-top: 8px;
+            }
+
+            .btn-entrar:hover {
+                transform: translateY(-2px);
+                opacity: 0.92;
+            }
+
+            .creditos {
+                margin-top: 22px;
+                font-size: 0.8rem;
+                color: #aaa;
+            }
+
+            .creditos strong {
+                color: #667eea;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Formulário de login enviado via POST para a rota /login do servidor -->
+        <main class="container-login">
+            <img src="/assets/img/fap.jpeg" alt="FAP Solidário Logo" class="logo-login" />
+
+            <h1 class="titulo-login">
+                <span class="letra-f">F</span><span class="letra-a">A</span><span class="letra-p">P</span>
+                <span class="letra-s">S</span><span class="letra-o">O</span><span class="letra-l">L</span
+                ><span class="letra-i">I</span><span class="letra-d">D</span><span class="letra-a">Á</span
+                ><span class="letra-r">R</span><span class="letra-i">I</span><span class="letra-o">O</span>
+            </h1>
+            <p class="subtitulo">Entre para doar ou receber doações</p>
+
+            <!-- Formulário enviado via JSON para a rota POST /api/auth/login -->
+            <form id="form-login">
+                <div class="campo">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" placeholder="seu@email.com" required />
+                </div>
+
+                <div class="campo">
+                    <label for="senha">Senha</label>
+                    <input type="password" id="senha" name="senha" placeholder="Sua senha" required />
+                </div>
+
+                <p id="msg-erro" style="display: none; color: #e74c3c; font-size: 0.85rem; margin-bottom: 10px"></p>
+
+                <button type="submit" class="btn-entrar">ENTRAR</button>
+            </form>
+
+            <p class="creditos">
+                Doador: <strong>teste@fap.com</strong> / <strong>123456</strong><br />Recebedor:
+                <strong>recebedor@fap.com</strong> / <strong>123456</strong>
+            </p>
+
+            <p style="margin-top: 16px; font-size: 0.85rem; color: #888">
+                Ainda não tem conta?
+                <a href="/pages/cadastro.html" style="color: #667eea; text-decoration: none; font-weight: 600"
+                    >Cadastre-se aqui</a
+                >
+            </p>
+        </main>
+
+        <script src="/assets/js/api.js"></script>
+        <script>
+            document.getElementById('form-login').addEventListener('submit', async (evento) => {
+                evento.preventDefault();
+                const msgErro = document.getElementById('msg-erro');
+                msgErro.style.display = 'none';
+
+                try {
+                    const dados = await FAP.post('/api/auth/login', {
+                        email: document.getElementById('email').value,
+                        senha: document.getElementById('senha').value
+                    });
+                    window.location.href = dados.papel === 'recebedor' ? '/pages/receber.html' : '/pages/opcoes.html';
+                } catch (erro) {
+                    msgErro.textContent = erro.message;
+                    msgErro.style.display = 'block';
+                }
+            });
+        </script>
+    </body>
+</html>

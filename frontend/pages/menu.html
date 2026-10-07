@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>FAP Solidário - Menu</title>
+        <style>
+            body {
+                margin: 0;
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                color: #fff;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <p style="font-size: 1.1rem; font-weight: 600">Abrindo seu menu...</p>
+            <p style="margin-top: 10px; font-size: 0.85rem; opacity: 0.8">
+                Se não for redirecionado, <a href="/index.html" style="color: #fff">faça login novamente</a>.
+            </p>
+        </div>
+
+        <script src="/assets/js/api.js"></script>
+        <script>
+            fetch('/api/auth/sessao')
+                .then((r) => (r.ok ? r.json() : Promise.reject()))
+                .then((sessao) => {
+                    window.location.href = sessao.papel === 'recebedor' ? '/pages/receber.html' : '/pages/opcoes.html';
+                })
+                .catch(() => {
+                    window.location.href = '/index.html';
+                });
+        </script>
+    </body>
+</html>

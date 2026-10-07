@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>FAP Solidário - Receber Doações</title>
+        <link rel="stylesheet" href="/assets/css/stylereceber.css" />
+    </head>
+    <body>
+        <main class="painel">
+            <header class="topo">
+                <div>
+                    <h1 class="titulo-painel">RECEBER DOAÇÕES</h1>
+                    <p class="boas-vindas" id="boas-vindas">Carregando seu perfil...</p>
+                </div>
+                <a
+                    href="#"
+                    onclick="
+                        FAP.sair();
+                        return false;
+                    "
+                    class="btn-sair"
+                    >SAIR DA CONTA</a
+                >
+            </header>
+
+            <nav class="abas" id="abas">
+                <button type="button" class="aba ativa" data-aba="alimentos">🍎 ALIMENTOS</button>
+                <button type="button" class="aba" data-aba="roupas">👕 ROUPAS</button>
+                <button type="button" class="aba" data-aba="higiene">🧼 HIGIENE</button>
+                <button type="button" class="aba" data-aba="moveis">🪑 MÓVEIS</button>
+                <button type="button" class="aba" data-aba="cultura">📚 CULTURA E OUTROS</button>
+                <button type="button" class="aba" data-aba="dinheiro">💰 DINHEIRO</button>
+                <button type="button" class="aba" data-aba="pedidos">📋 MEUS PEDIDOS</button>
+            </nav>
+
+            <section id="painel-itens">
+                <div class="grade-itens" id="grade-itens"></div>
+            </section>
+
+            <section id="painel-pedidos" hidden>
+                <table class="tabela">
+                    <thead>
+                        <tr>
+                            <th>Pedido</th>
+                            <th>Item</th>
+                            <th>Categoria</th>
+                            <th>Quantidade</th>
+                            <th>Data</th>
+                        </tr>
+                    </thead>
+                    <tbody id="corpo-pedidos">
+                        <tr class="vazio">
+                            <td colspan="5">Você ainda não fez pedidos.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <div class="rodape">
+                <a href="/pages/informacoes.html">MAIS INFORMAÇÕES</a>
+            </div>
+        </main>
+
+        <div class="modal-overlay" id="modal-solicitacao">
+            <div class="modal-box">
+                <h3>Solicitar Doação</h3>
+                <p class="sub" id="modal-item-nome"></p>
+                <div class="campo">
+                    <label for="modal-qtd">Quantidade desejada</label>
+                    <input type="number" id="modal-qtd" min="1" value="1" />
+                </div>
+                <div class="modal-botoes">
+                    <button class="btn-cancelar" type="button" onclick="fecharModal()">Cancelar</button>
+                    <button class="btn-confirmar" type="button" onclick="confirmarSolicitacao()">Confirmar</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="toast" id="toast"></div>
+
+        <script src="/assets/js/api.js"></script>
+        <script>
+            const CATEGORIAS = {
+                alimentos: ['alimento', 'cesta'],
+                roupas: ['roupa', 'acessório', 'acessorio', 'calçado', 'calcado', 'sapato'],
+                higiene: ['higiene', 'limpeza', 'cuidados'],
+                moveis: ['móvel', 'moveis', 'móvels', 'casa'],
+                cultura: ['cultural', 'livro', 'escolar', 'educação', 'educacao', 'brinquedo'],
+                dinheiro: ['dinheiro']
+            };
+
+            const ROTULOS = {
+                alimentos: 'Alimentos',
+                roupas: 'Roupas',
+                higiene: 'Higiene',
+                moveis: 'Móveis',
+                cultura: 'Itens Culturais',
+                dinheiro: 'Dinheiro'
+            };
+
+            let estoque = [];
+            let abaAtiva = 'alimentos';
+            let itemAlvo = null;
+
+            function escapeHtml(str) {
+                if (!str) return '';
+                const div = document.createElement('div');
+                div.appendChild(document.createTextNode(str));
+                return div.innerHTML.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+            }
+
+            function showToast(msg, tipo) {
+                const t = document.getElementById('toast');
+                t.textContent = msg;
+                t.className = 'toast ' + tipo + ' mostrar';
+                setTimeout(() => {
+                    t.className = 'toast';
+                }, 3500);
+            }
+
+            function categoriaCompativel(categoria, aba) {
+                const texto = (categoria || '').toLowerCase();
+                if (!CATEGORIAS[aba]) return false;
+                return CATEGORIAS[aba].some((palavra) => texto.includes(palavra));
+            }
+
+            function pertenceAAlgumaAba(categoria) {
+                return Object.keys(CATEGORIAS).some((aba) => categoriaCompativel(categoria, aba));
+            }
+
+            function abrirModal(id, nome, disponivel) {
+                itemAlvo = { id, disponivel };
+                document.getElementById('modal-item-nome').textContent = nome + ' — disponível: ' + disponivel;
+                document.getElementById('modal-qtd').value = 1;
+                document.getElementById('modal-qtd').max = disponivel;
+                document.getElementById('modal-solicitacao').classList.add('ativo');
+            }
+
+            function fecharModal() {
+                document.getElementById('modal-solicitacao').classList.remove('ativo');
+                itemAlvo = null;
+            }
+
+            function confirmarSolicitacao() {
+                if (!itemAlvo) return;
+                const qtd = parseInt(document.getElementById('modal-qtd').value);
+                if (!qtd || qtd <= 0) {
+                    showToast('Quantidade inválida.', 'erro');
+                    return;
+                }
+
+                fetch('/api/pedidos', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ id_item: itemAlvo.id, quantidade_pedida: qtd })
+                })
+                    .then((r) => r.json().then((d) => ({ ok: r.ok, data: d })))
+                    .then(({ ok, data }) => {
+                        if (ok) showToast(data.mensagem, 'sucesso');
+                        else showToast(data.mensagem || 'Erro ao solicitar.', 'erro');
+                        fecharModal();
+                        carregarEstoque();
+                        carregarPedidos();
+                    })
+                    .catch(() => {
+                        showToast('Erro de conexão.', 'erro');
+                        fecharModal();
+                    });
+            }
+
+            function renderizarItens() {
+                const grade = document.getElementById('grade-itens');
+                const itens = estoque.filter(
+                    (item) => item.quantidade > 0 && categoriaCompativel(item.categoria, abaAtiva)
+                );
+
+                if (itens.length === 0) {
+                    grade.innerHTML =
+                        '<p class="vazio" style="grid-column:1/-1">Nenhum item disponível nesta categoria no momento. Volte em breve!</p>';
+                    return;
+                }
+
+                let html = '';
+                itens.forEach((item) => {
+                    html +=
+                        '<article class="card-item">' +
+                        '<span class="badge">' +
+                        escapeHtml(ROTULOS[abaAtiva]) +
+                        '</span>' +
+                        '<h3>' +
+                        escapeHtml(item.nome_item) +
+                        '</h3>' +
+                        '<span class="detalhe">Doação de: ' +
+                        escapeHtml(item.empresa_nome) +
+                        '</span>' +
+                        (item.data_validade
+                            ? '<span class="detalhe">Validade: ' + escapeHtml(item.data_validade) + '</span>'
+                            : '') +
+                        '<span class="disponivel">Disponível: ' +
+                        item.quantidade +
+                        ' un.</span>' +
+                        '<button type="button" class="btn-solicitar" data-id="' +
+                        item.id +
+                        '" data-nome="' +
+                        escapeHtml(item.nome_item) +
+                        '" data-disp="' +
+                        item.quantidade +
+                        '">SOLICITAR</button>' +
+                        '</article>';
+                });
+                grade.innerHTML = html;
+
+                grade.querySelectorAll('.btn-solicitar').forEach((btn) => {
+                    btn.addEventListener('click', function () {
+                        abrirModal(
+                            parseInt(this.getAttribute('data-id')),
+                            this.getAttribute('data-nome'),
+                            parseInt(this.getAttribute('data-disp'))
+                        );
+                    });
+                });
+            }
+
+            function renderizarPedidos(pedidos) {
+                const corpo = document.getElementById('corpo-pedidos');
+                if (!pedidos || pedidos.length === 0) {
+                    corpo.innerHTML = '<tr class="vazio"><td colspan="5">Você ainda não fez pedidos.</td></tr>';
+                    return;
+                }
+                let html = '';
+                pedidos.forEach((p) => {
+                    html +=
+                        '<tr>' +
+                        '<td>' +
+                        p.id +
+                        '</td>' +
+                        '<td>' +
+                        escapeHtml(p.nome_item) +
+                        '</td>' +
+                        '<td>' +
+                        escapeHtml(p.categoria) +
+                        '</td>' +
+                        '<td>' +
+                        p.quantidade_pedida +
+                        '</td>' +
+                        '<td>' +
+                        escapeHtml(p.data_pedido) +
+                        '</td>' +
+                        '</tr>';
+                });
+                corpo.innerHTML = html;
+            }
+
+            function carregarEstoque() {
+                fetch('/api/estoque')
+                    .then((r) => (r.ok ? r.json() : Promise.reject()))
+                    .then((dados) => {
+                        estoque = dados;
+                        renderizarItens();
+                    })
+                    .catch(() => {
+                        document.getElementById('grade-itens').innerHTML =
+                            '<p class="vazio" style="grid-column:1/-1">Erro ao carregar os itens disponíveis.</p>';
+                    });
+            }
+
+            function carregarPedidos() {
+                fetch('/api/pedidos')
+                    .then((r) => (r.ok ? r.json() : Promise.reject()))
+                    .then(renderizarPedidos)
+                    .catch(() => {
+                        document.getElementById('corpo-pedidos').innerHTML =
+                            '<tr class="vazio"><td colspan="5">Erro ao carregar seus pedidos.</td></tr>';
+                    });
+            }
+
+            document.getElementById('abas').addEventListener('click', function (evento) {
+                const botao = evento.target.closest('.aba');
+                if (!botao) return;
+
+                document.querySelectorAll('.aba').forEach((a) => a.classList.remove('ativa'));
+                botao.classList.add('ativa');
+                abaAtiva = botao.getAttribute('data-aba');
+
+                const mostrarPedidos = abaAtiva === 'pedidos';
+                document.getElementById('painel-itens').hidden = mostrarPedidos;
+                document.getElementById('painel-pedidos').hidden = !mostrarPedidos;
+
+                if (mostrarPedidos) carregarPedidos();
+                else renderizarItens();
+            });
+
+            fetch('/api/auth/sessao')
+                .then((r) => (r.ok ? r.json() : Promise.reject()))
+                .then((sessao) => {
+                    document.getElementById('boas-vindas').textContent =
+                        'Olá, ' + sessao.nome + ' (' + sessao.tipo + ') - escolha abaixo o que você precisa receber.';
+                })
+                .catch(() => {
+                    window.location.href = '/index.html';
+                });
+
+            carregarEstoque();
+        </script>
+    </body>
+</html>
