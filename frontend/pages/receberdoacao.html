@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>FAP Solidário - Receber Doações</title>
+        <title>FAP SOLIDÁRIO - Receber Doações</title>
         <style>
             body {
                 margin: 0;
@@ -16,10 +16,54 @@
                 color: #fff;
                 text-align: center;
             }
-        </style>
+        
+/* === Seletor de Idiomas (PT | EN | ES) === */
+.seletor-idioma {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  z-index: 9999;
+  display: flex;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 4px;
+  border-radius: 20px;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.btn-lang {
+  border: none;
+  background: transparent;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 15px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.8rem;
+  line-height: 1;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  transition: all 0.2s ease;
+}
+.btn-lang:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+.btn-lang.active {
+  background: #f1db0c;
+  color: #000;
+  text-shadow: none;
+}
+
+</style>
+        <link rel="stylesheet" href="/assets/css/design-system.css" />
     </head>
-    <body>
-        <div>
+    <body class="ds-page ds-page--center">
+    <div class="seletor-idioma">
+      <button type="button" class="btn-lang active" data-lang="pt">PT</button>
+      <button type="button" class="btn-lang" data-lang="en">EN</button>
+      <button type="button" class="btn-lang" data-lang="es">ES</button>
+    </div>
+        <div class="ds-redirect">
             <p style="font-weight: 600">Abrindo a área de recebimento de doações...</p>
             <p style="margin-top: 10px; font-size: 0.85rem; opacity: 0.85">
                 Se não for redirecionado, <a href="/pages/menu.html" style="color: #fff">clique aqui</a>.
@@ -27,15 +71,7 @@
         </div>
 
         <script src="/assets/js/api.js"></script>
-        <script>
-            fetch('/api/auth/sessao')
-                .then((r) => (r.ok ? r.json() : Promise.reject()))
-                .then((sessao) => {
-                    window.location.href = sessao.papel === 'recebedor' ? '/pages/receber.html' : '/pages/doar.html';
-                })
-                .catch(() => {
-                    window.location.href = '/index.html';
-                });
-        </script>
-    </body>
+        <script src="/assets/js/receberdoacao.js"></script>
+        <script src="/assets/js/tradutor.js"></script>
+</body>
 </html>

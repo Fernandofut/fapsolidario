@@ -3,241 +3,636 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>FAP Solidário - Cadastro</title>
-        <style>
-            * {
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            }
-
-            body {
-                min-height: 100vh;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                padding: 20px;
-            }
-
-            .container-cadastro {
-                background: #ffffff;
-                border-radius: 16px;
-                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-                padding: 45px 40px;
-                width: 100%;
-                max-width: 480px;
-                text-align: center;
-            }
-
-            .titulo-cadastro {
-                font-size: 1.8rem;
-                font-weight: 800;
-                color: #333;
-                margin-bottom: 6px;
-            }
-
-            .letra-f {
-                color: #667eea;
-            }
-            .letra-a {
-                color: #764ba2;
-            }
-            .letra-p {
-                color: #f093fb;
-            }
-            .letra-s {
-                color: #6a11cb;
-            }
-            .letra-o {
-                color: #f5576c;
-            }
-            .letra-l {
-                color: #4facfe;
-            }
-            .letra-i {
-                color: #43e97b;
-            }
-            .letra-d {
-                color: #fa709a;
-            }
-            .letra-r {
-                color: #fccb90;
-            }
-
-            .subtitulo {
-                color: #888;
-                font-size: 0.9rem;
-                margin-bottom: 30px;
-            }
-
-            .campo {
-                text-align: left;
-                margin-bottom: 18px;
-            }
-
-            .campo label {
-                display: block;
-                font-size: 0.85rem;
-                font-weight: 600;
-                color: #555;
-                margin-bottom: 6px;
-            }
-
-            .campo input,
-            .campo select {
-                width: 100%;
-                padding: 13px 15px;
-                border: 2px solid #e0e0e0;
-                border-radius: 10px;
-                font-size: 1rem;
-                transition: border-color 0.3s;
-                outline: none;
-                background: #fff;
-            }
-
-            .campo input:focus,
-            .campo select:focus {
-                border-color: #667eea;
-            }
-
-            .btn-cadastrar {
-                width: 100%;
-                padding: 14px;
-                background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-                color: #fff;
-                border: none;
-                border-radius: 10px;
-                font-size: 1.05rem;
-                font-weight: 700;
-                cursor: pointer;
-                transition:
-                    transform 0.2s,
-                    opacity 0.2s;
-                margin-top: 8px;
-            }
-
-            .btn-cadastrar:hover {
-                transform: translateY(-2px);
-                opacity: 0.92;
-            }
-
-            .link-login {
-                margin-top: 22px;
-                font-size: 0.85rem;
-                color: #888;
-            }
-
-            .link-login a {
-                color: #667eea;
-                text-decoration: none;
-                font-weight: 600;
-            }
-
-            .link-login a:hover {
-                text-decoration: underline;
-            }
-
-            .dica-tipo {
-                display: block;
-                margin-top: 6px;
-                font-size: 0.78rem;
-                color: #888;
-                line-height: 1.4;
-            }
-
-            .campo select optgroup {
-                font-weight: 700;
-                color: #444;
-            }
-        </style>
+        <title>FAP SOLIDÁRIO - Cadastro</title>
+        <link rel="stylesheet" href="/assets/css/design-system.css" />
     </head>
-    <body>
-        <main class="container-cadastro">
-            <h1 class="titulo-cadastro">
-                <span class="letra-f">F</span><span class="letra-a">A</span><span class="letra-p">P</span>
-                <span class="letra-s">S</span><span class="letra-o">O</span><span class="letra-l">L</span
-                ><span class="letra-i">I</span><span class="letra-d">D</span><span class="letra-a">Á</span
-                ><span class="letra-r">R</span><span class="letra-i">I</span><span class="letra-o">O</span>
-            </h1>
-            <p class="subtitulo">Crie sua conta para doar ou receber</p>
+    <body class="ds-page ds-page--center">
+        <div class="seletor-idioma">
+            <button type="button" class="btn-lang active" data-lang="pt">PT</button>
+            <button type="button" class="btn-lang" data-lang="en">EN</button>
+            <button type="button" class="btn-lang" data-lang="es">ES</button>
+        </div>
 
-            <form id="form-cadastro">
-                <div class="campo">
-                    <label for="nome">Nome</label>
-                    <input type="text" id="nome" name="nome" placeholder="Seu nome completo" required />
-                </div>
+        <main class="ds-auth ds-auth-card--wide">
+            <div class="ds-auth-card">
+                <h1 class="ds-brand">
+                    <span class="letra-f">F</span><span class="letra-a">A</span><span class="letra-p">P</span>
+                    <span class="letra-s">S</span><span class="letra-o">O</span><span class="letra-l">L</span
+                    ><span class="letra-i">I</span><span class="letra-d">D</span><span class="letra-a">Á</span
+                    ><span class="letra-r">R</span><span class="letra-i">I</span><span class="letra-o">O</span>
+                </h1>
+                <p class="ds-auth-subtitle">Crie sua conta para doar ou receber</p>
 
-                <div class="campo">
-                    <label for="email">E-mail</label>
-                    <input type="email" id="email" name="email" placeholder="seu@email.com" required />
-                </div>
+                <form id="form-cadastro" class="ds-form" novalidate>
+                    <div class="ds-field">
+                        <label class="ds-label" for="tipo">O que você quer fazer no FAP SOLIDÁRIO?</label>
+                        <select id="tipo" name="tipo" class="ds-select" required>
+                            <optgroup label="Quero DOAR">
+                                <option value="Doador Comum">Doador (Pessoa Física ou Jurídica)</option>
+                                <option value="Empresa">Empresa / Ponto de Coleta</option>
+                            </optgroup>
+                            <optgroup label="Quero RECEBER">
+                                <option value="Beneficiário">Recebedor / Beneficiário</option>
+                            </optgroup>
+                        </select>
+                        <small class="ds-help" id="dica-tipo"
+                            >Você poderá registrar doações de alimentos, roupas, higiene, móveis e dinheiro.</small
+                        >
+                    </div>
 
-                <div class="campo">
-                    <label for="senha">Senha</label>
-                    <input type="password" id="senha" name="senha" placeholder="Crie uma senha" required />
-                </div>
+                    <div class="ds-form-grid">
+                        <div class="ds-field ds-field--full">
+                            <label class="ds-label" id="label-nome" for="nome">Nome Completo</label>
+                            <input
+                                class="ds-input"
+                                type="text"
+                                id="nome"
+                                name="nome"
+                                placeholder="Seu nome completo"
+                                autocomplete="name"
+                                required
+                            />
+                        </div>
 
-                <div class="campo">
-                    <label for="tipo">O que você quer fazer no FAP Solidário?</label>
-                    <select id="tipo" name="tipo" required>
-                        <optgroup label="Quero DOAR">
-                            <option value="Doador Comum">Doador Comum</option>
-                            <option value="Empresa">Empresa / Organização</option>
-                        </optgroup>
-                        <optgroup label="Quero RECEBER">
-                            <option value="Beneficiário">Beneficiário (receber doações)</option>
-                        </optgroup>
-                    </select>
-                    <small class="dica-tipo" id="dica-tipo"
-                        >Você poderá registrar doações de alimentos, roupas, higiene, móveis e dinheiro.</small
-                    >
-                </div>
+                        <div class="ds-field">
+                            <label class="ds-label" for="email">E-mail</label>
+                            <input
+                                class="ds-input"
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="seu@email.com"
+                                autocomplete="email"
+                                required
+                            />
+                        </div>
 
-                <p id="msg-erro" style="display: none; color: #e74c3c; font-size: 0.85rem; margin-bottom: 10px"></p>
+                        <div class="ds-field">
+                            <label class="ds-label" for="senha">Senha</label>
+                            <input
+                                class="ds-input"
+                                type="password"
+                                id="senha"
+                                name="senha"
+                                placeholder="Crie uma senha (mín. 6 caracteres)"
+                                autocomplete="new-password"
+                                minlength="6"
+                                required
+                            />
+                        </div>
+                    </div>
 
-                <button type="submit" class="btn-cadastrar">CADASTRAR</button>
-            </form>
+                    <!-- ============================ DOADOR ============================ -->
+                    <section id="campos-doador" aria-labelledby="titulo-doador">
+                        <h2 class="ds-section-title" id="titulo-doador">Dados do Doador</h2>
 
-            <p class="link-login">Já tem uma conta? <a href="/index.html">Faça login aqui</a></p>
+                        <div class="ds-form-grid">
+                            <div class="ds-field">
+                                <label class="ds-label" for="doador-tipo-pessoa">Tipo de pessoa</label>
+                                <select id="doador-tipo-pessoa" name="tipo_pessoa" class="ds-select">
+                                    <option value="PF">Pessoa Física (CPF)</option>
+                                    <option value="PJ">Pessoa Jurídica (CNPJ)</option>
+                                </select>
+                            </div>
+
+                            <div class="ds-field">
+                                <label class="ds-label" id="label-documento-doador" for="doador-documento"
+                                    >CPF</label
+                                >
+                                <input
+                                    class="ds-input"
+                                    type="text"
+                                    id="doador-documento"
+                                    name="documento"
+                                    placeholder="000.000.000-00"
+                                    inputmode="numeric"
+                                    maxlength="18"
+                                    autocomplete="off"
+                                />
+                            </div>
+
+                            <div class="ds-field">
+                                <label class="ds-label" for="doador-telefone">Telefone / WhatsApp</label>
+                                <input
+                                    class="ds-input"
+                                    type="tel"
+                                    id="doador-telefone"
+                                    name="telefone"
+                                    placeholder="(66) 99999-9999"
+                                    inputmode="tel"
+                                    autocomplete="tel"
+                                />
+                            </div>
+
+                            <div class="ds-field">
+                                <label class="ds-label" for="doador-cep">CEP</label>
+                                <input
+                                    class="ds-input"
+                                    type="text"
+                                    id="doador-cep"
+                                    name="cep"
+                                    placeholder="00000-000"
+                                    inputmode="numeric"
+                                    maxlength="9"
+                                    autocomplete="postal-code"
+                                />
+                                <small class="ds-help" id="doador-cep-status"
+                                    >Preenchimento automático da morada via ViaCEP.</small
+                                >
+                            </div>
+
+                            <div class="ds-field ds-field--full">
+                                <label class="ds-label" for="doador-rua">Nome da Rua</label>
+                                <input
+                                    class="ds-input"
+                                    type="text"
+                                    id="doador-rua"
+                                    name="rua"
+                                    placeholder="Ex.: Rua Cuiabá"
+                                    autocomplete="address-line1"
+                                />
+                            </div>
+
+                            <div class="ds-field">
+                                <label class="ds-label" for="doador-bairro">Bairro</label>
+                                <input
+                                    class="ds-input"
+                                    type="text"
+                                    id="doador-bairro"
+                                    name="bairro"
+                                    placeholder="Ex.: Centro"
+                                    autocomplete="address-line2"
+                                />
+                            </div>
+
+                            <div class="ds-field">
+                                <label class="ds-label" for="doador-numero">Número da Casa / Prédio</label>
+                                <input
+                                    class="ds-input"
+                                    type="text"
+                                    id="doador-numero"
+                                    name="numero"
+                                    placeholder="Ex.: 123"
+                                    inputmode="numeric"
+                                />
+                            </div>
+
+                            <div class="ds-field ds-field--full">
+                                <label class="ds-label" for="doador-complemento">Complemento (opcional)</label>
+                                <input
+                                    class="ds-input"
+                                    type="text"
+                                    id="doador-complemento"
+                                    name="complemento"
+                                    placeholder="Ex.: Apto 2, Fundos, Bloco B"
+                                />
+                            </div>
+                        </div>
+
+                        <fieldset class="ds-fieldset">
+                            <legend class="ds-legend">Como prefere entregar sua doação? *</legend>
+                            <div class="ds-check-grid">
+                                <label class="ds-check">
+                                    <input type="radio" name="logistica" value="ponto_coleta" checked />
+                                    <span>Posso levar até um Ponto de Coleta</span>
+                                </label>
+                                <label class="ds-check">
+                                    <input type="radio" name="logistica" value="retirada_domicilio" />
+                                    <span>Solicito retirada em domicílio</span>
+                                </label>
+                            </div>
+                        </fieldset>
+
+                        <fieldset class="ds-fieldset">
+                            <legend class="ds-legend">Categorias de doação mais frequentes *</legend>
+                            <div class="ds-check-grid">
+                                <label class="ds-check">
+                                    <input type="checkbox" name="doador_categorias" value="alimentos" />
+                                    <span>Alimentos</span>
+                                </label>
+                                <label class="ds-check">
+                                    <input type="checkbox" name="doador_categorias" value="roupas" />
+                                    <span>Roupas</span>
+                                </label>
+                                <label class="ds-check">
+                                    <input type="checkbox" name="doador_categorias" value="higiene,moveis" />
+                                    <span>Higiene / Móveis</span>
+                                </label>
+                                <label class="ds-check">
+                                    <input type="checkbox" name="doador_categorias" value="dinheiro" />
+                                    <span>Dinheiro</span>
+                                </label>
+                            </div>
+                            <small class="ds-help">Selecione pelo menos uma categoria de doação.</small>
+                        </fieldset>
+                    </section>
+
+                    <!-- ========================== BENEFICIÁRIO ========================== -->
+                    <section id="campos-beneficiario" class="ds-hidden" aria-labelledby="titulo-beneficiario">
+                        <h2 class="ds-section-title" id="titulo-beneficiario">
+                            Triagem Social do Beneficiário
+                        </h2>
+                        <p class="ds-help">
+                            Dados inspirados no CadÚnico/CRAS. Campos com * são obrigatórios; o NIS é opcional e
+                            ajuda na priorização social.
+                        </p>
+
+                        <div class="ds-form-grid">
+                            <div class="ds-field">
+                                <label class="ds-label" for="beneficiario-cpf">CPF *</label>
+                                <input
+                                    class="ds-input"
+                                    type="text"
+                                    id="beneficiario-cpf"
+                                    name="cpf"
+                                    placeholder="000.000.000-00"
+                                    inputmode="numeric"
+                                    maxlength="14"
+                                    autocomplete="off"
+                                />
+                            </div>
+
+                            <div class="ds-field">
+                                <label class="ds-label" for="beneficiario-rg">RG *</label>
+                                <input
+                                    class="ds-input"
+                                    type="text"
+                                    id="beneficiario-rg"
+                                    name="rg"
+                                    placeholder="Ex.: 1234567-8 SSP/MT"
+                                    maxlength="30"
+                                    autocomplete="off"
+                                />
+                            </div>
+
+                            <div class="ds-field">
+                                <label class="ds-label" for="beneficiario-nascimento">Data de Nascimento *</label>
+                                <input
+                                    class="ds-input"
+                                    type="date"
+                                    id="beneficiario-nascimento"
+                                    name="data_nascimento"
+                                    autocomplete="bday"
+                                />
+                            </div>
+
+                            <div class="ds-field">
+                                <label class="ds-label" for="beneficiario-telefone"
+                                    >Telefone / WhatsApp para Contato Direto *</label
+                                >
+                                <input
+                                    class="ds-input"
+                                    type="tel"
+                                    id="beneficiario-telefone"
+                                    name="telefone"
+                                    placeholder="(66) 99999-9999"
+                                    inputmode="tel"
+                                    autocomplete="tel"
+                                />
+                            </div>
+
+                            <div class="ds-field ds-field--full">
+                                <label class="ds-label" for="beneficiario-nis"
+                                    >Número do NIS / CadÚnico (opcional)</label
+                                >
+                                <input
+                                    class="ds-input"
+                                    type="text"
+                                    id="beneficiario-nis"
+                                    name="nis"
+                                    placeholder="00000000000"
+                                    inputmode="numeric"
+                                    maxlength="11"
+                                    autocomplete="off"
+                                />
+                                <small class="ds-help">Usado apenas para priorização social, não é divulgado.</small>
+                            </div>
+
+                            <div class="ds-field">
+                                <label class="ds-label" for="beneficiario-cep">CEP *</label>
+                                <input
+                                    class="ds-input"
+                                    type="text"
+                                    id="beneficiario-cep"
+                                    name="cep"
+                                    placeholder="00000-000"
+                                    inputmode="numeric"
+                                    maxlength="9"
+                                    autocomplete="postal-code"
+                                />
+                                <small class="ds-help" id="beneficiario-cep-status"
+                                    >Preenchimento automático da morada via ViaCEP.</small
+                                >
+                            </div>
+
+                            <div class="ds-field ds-field--full">
+                                <label class="ds-label" for="beneficiario-rua">Nome da Rua *</label>
+                                <input
+                                    class="ds-input"
+                                    type="text"
+                                    id="beneficiario-rua"
+                                    name="rua"
+                                    placeholder="Ex.: Rua Cuiabá"
+                                    autocomplete="address-line1"
+                                />
+                            </div>
+
+                            <div class="ds-field">
+                                <label class="ds-label" for="beneficiario-bairro">Bairro *</label>
+                                <input
+                                    class="ds-input"
+                                    type="text"
+                                    id="beneficiario-bairro"
+                                    name="bairro"
+                                    placeholder="Ex.: Centro"
+                                    autocomplete="address-line2"
+                                />
+                            </div>
+
+                            <div class="ds-field">
+                                <label class="ds-label" for="beneficiario-numero">Número *</label>
+                                <input
+                                    class="ds-input"
+                                    type="text"
+                                    id="beneficiario-numero"
+                                    name="numero"
+                                    placeholder="Ex.: 123"
+                                    inputmode="numeric"
+                                />
+                            </div>
+
+                            <div class="ds-field ds-field--full">
+                                <label class="ds-label" for="beneficiario-referencia"
+                                    >Ponto de Referência *</label
+                                >
+                                <input
+                                    class="ds-input"
+                                    type="text"
+                                    id="beneficiario-referencia"
+                                    name="ponto_referencia"
+                                    placeholder="Ex.: Ao lado da escola municipal, em frente ao mercado"
+                                />
+                                <small class="ds-help">Essencial para que a entrega chegue ao endereço correto.</small>
+                            </div>
+                        </div>
+
+                        <h3 class="ds-section-title">Composição Familiar e Renda</h3>
+                        <div class="ds-form-grid">
+                            <div class="ds-field">
+                                <label class="ds-label" for="beneficiario-adultos">Adultos na casa *</label>
+                                <input
+                                    class="ds-input"
+                                    type="number"
+                                    id="beneficiario-adultos"
+                                    name="adultos"
+                                    min="0"
+                                    step="1"
+                                    value="0"
+                                    inputmode="numeric"
+                                />
+                            </div>
+
+                            <div class="ds-field">
+                                <label class="ds-label" for="beneficiario-criancas"
+                                    >Crianças (0 a 12 anos) *</label
+                                >
+                                <input
+                                    class="ds-input"
+                                    type="number"
+                                    id="beneficiario-criancas"
+                                    name="criancas"
+                                    min="0"
+                                    step="1"
+                                    value="0"
+                                    inputmode="numeric"
+                                />
+                            </div>
+
+                            <div class="ds-field">
+                                <label class="ds-label" for="beneficiario-idosos">Idosos na casa *</label>
+                                <input
+                                    class="ds-input"
+                                    type="number"
+                                    id="beneficiario-idosos"
+                                    name="idosos"
+                                    min="0"
+                                    step="1"
+                                    value="0"
+                                    inputmode="numeric"
+                                />
+                            </div>
+
+                            <div class="ds-field">
+                                <label class="ds-label" for="beneficiario-renda">Renda Familiar Mensal *</label>
+                                <select id="beneficiario-renda" name="renda_familiar" class="ds-select">
+                                    <option value="">Selecione...</option>
+                                    <option value="Até 1 salário mínimo">Até 1 salário mínimo</option>
+                                    <option value="1 a 2 salários mínimos">1 a 2 salários mínimos</option>
+                                    <option value="Sem renda fixa">Sem renda fixa</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <fieldset class="ds-fieldset">
+                            <legend class="ds-legend">Principais Necessidades Atuais *</legend>
+                            <div class="ds-check-grid">
+                                <label class="ds-check">
+                                    <input
+                                        type="checkbox"
+                                        name="beneficiario_necessidades"
+                                        value="Cesta Básica / Alimentos"
+                                    />
+                                    <span>Cesta Básica / Alimentos</span>
+                                </label>
+                                <label class="ds-check">
+                                    <input
+                                        type="checkbox"
+                                        name="beneficiario_necessidades"
+                                        value="Roupas Infantis/Adulto"
+                                    />
+                                    <span>Roupas Infantis/Adulto</span>
+                                </label>
+                                <label class="ds-check">
+                                    <input
+                                        type="checkbox"
+                                        name="beneficiario_necessidades"
+                                        value="Itens de Higiene"
+                                    />
+                                    <span>Itens de Higiene</span>
+                                </label>
+                                <label class="ds-check">
+                                    <input
+                                        type="checkbox"
+                                        name="beneficiario_necessidades"
+                                        value="Móveis/Eletros"
+                                    />
+                                    <span>Móveis/Eletros</span>
+                                </label>
+                            </div>
+                        </fieldset>
+                    </section>
+
+                    <!-- ============================ EMPRESA ============================ -->
+                    <section id="campos-empresa" class="ds-hidden" aria-labelledby="titulo-empresa">
+                        <h2 class="ds-section-title" id="titulo-empresa">Dados da Empresa / Ponto de Coleta</h2>
+
+                        <div class="ds-form-grid">
+                            <div class="ds-field">
+                                <label class="ds-label" for="empresa-documento">CNPJ *</label>
+                                <input
+                                    class="ds-input"
+                                    type="text"
+                                    id="empresa-documento"
+                                    name="documento"
+                                    placeholder="00.000.000/0000-00"
+                                    inputmode="numeric"
+                                    maxlength="18"
+                                    autocomplete="off"
+                                />
+                            </div>
+
+                            <div class="ds-field">
+                                <label class="ds-label" for="empresa-telefone">Telefone / WhatsApp *</label>
+                                <input
+                                    class="ds-input"
+                                    type="tel"
+                                    id="empresa-telefone"
+                                    name="telefone"
+                                    placeholder="(66) 99999-9999"
+                                    inputmode="tel"
+                                    autocomplete="tel"
+                                />
+                                <small class="ds-help">Formato com DDD. Usado nos botões Ligar e WhatsApp.</small>
+                            </div>
+
+                            <div class="ds-field">
+                                <label class="ds-label" for="empresa-cep">CEP *</label>
+                                <input
+                                    class="ds-input"
+                                    type="text"
+                                    id="empresa-cep"
+                                    name="cep"
+                                    placeholder="00000-000"
+                                    inputmode="numeric"
+                                    maxlength="9"
+                                    autocomplete="postal-code"
+                                />
+                                <small class="ds-help" id="empresa-cep-status"
+                                    >Preenchimento automático da morada via ViaCEP.</small
+                                >
+                            </div>
+
+                            <div class="ds-field ds-field--full">
+                                <label class="ds-label" for="empresa-rua">Nome da Rua *</label>
+                                <input
+                                    class="ds-input"
+                                    type="text"
+                                    id="empresa-rua"
+                                    name="rua"
+                                    placeholder="Ex.: Rua Cuiabá"
+                                    autocomplete="address-line1"
+                                />
+                            </div>
+
+                            <div class="ds-field">
+                                <label class="ds-label" for="empresa-bairro">Bairro *</label>
+                                <input
+                                    class="ds-input"
+                                    type="text"
+                                    id="empresa-bairro"
+                                    name="bairro"
+                                    placeholder="Ex.: Centro"
+                                    autocomplete="address-line2"
+                                />
+                            </div>
+
+                            <div class="ds-field">
+                                <label class="ds-label" for="empresa-numero">Número *</label>
+                                <input
+                                    class="ds-input"
+                                    type="text"
+                                    id="empresa-numero"
+                                    name="numero"
+                                    placeholder="Ex.: 123"
+                                    inputmode="numeric"
+                                />
+                            </div>
+
+                            <div class="ds-field ds-field--full">
+                                <label class="ds-label" for="empresa-complemento">Complemento (opcional)</label>
+                                <input
+                                    class="ds-input"
+                                    type="text"
+                                    id="empresa-complemento"
+                                    name="complemento"
+                                    placeholder="Ex.: Sala 2, Fundos, Bloco B"
+                                />
+                            </div>
+
+                            <div class="ds-field ds-field--full">
+                                <label class="ds-label" for="empresa-referencia">Ponto de Referência *</label>
+                                <input
+                                    class="ds-input"
+                                    type="text"
+                                    id="empresa-referencia"
+                                    name="ponto_referencia"
+                                    placeholder="Ex.: Em frente à praça central"
+                                />
+                            </div>
+
+                            <div class="ds-field ds-field--full">
+                                <label class="ds-label" for="empresa-horario">Horário de Funcionamento *</label>
+                                <input
+                                    class="ds-input"
+                                    type="text"
+                                    id="empresa-horario"
+                                    name="horario_funcionamento"
+                                    placeholder="Ex.: Segunda a sexta, das 8h às 18h"
+                                />
+                                <small class="ds-help">Informe os dias e horários em que o ponto recebe doações.</small>
+                            </div>
+                        </div>
+
+                        <fieldset class="ds-fieldset">
+                            <legend class="ds-legend">Categorias aceitas *</legend>
+                            <div class="ds-check-grid">
+                                <label class="ds-check">
+                                    <input type="checkbox" name="empresa_categorias" value="alimentos" />
+                                    <span>Alimentos</span>
+                                </label>
+                                <label class="ds-check">
+                                    <input type="checkbox" name="empresa_categorias" value="roupas" />
+                                    <span>Roupas</span>
+                                </label>
+                                <label class="ds-check">
+                                    <input type="checkbox" name="empresa_categorias" value="higiene,moveis" />
+                                    <span>Higiene / Móveis</span>
+                                </label>
+                                <label class="ds-check">
+                                    <input type="checkbox" name="empresa_categorias" value="dinheiro" />
+                                    <span>Dinheiro</span>
+                                </label>
+                            </div>
+                            <small class="ds-help">Selecione pelo menos uma categoria de doação aceita.</small>
+                        </fieldset>
+                    </section>
+
+                    <p id="msg-erro" class="ds-alert ds-alert--error" role="alert" style="display: none"></p>
+                    <p id="msg-sucesso" class="ds-alert ds-alert--success" role="status" style="display: none"></p>
+
+                    <button type="submit" class="ds-btn ds-btn--success ds-btn--block" id="btn-cadastrar">
+                        CADASTRAR
+                    </button>
+                </form>
+
+                <p class="ds-auth-footer">
+                    Já tem uma conta? <a href="/index.html" class="ds-link">Faça login aqui</a>
+                </p>
+            </div>
         </main>
 
         <script src="/assets/js/api.js"></script>
-        <script>
-            document.getElementById('form-cadastro').addEventListener('submit', async (evento) => {
-                evento.preventDefault();
-                const msgErro = document.getElementById('msg-erro');
-                msgErro.style.display = 'none';
-
-                try {
-                    await FAP.post('/api/auth/cadastro', {
-                        nome: document.getElementById('nome').value,
-                        email: document.getElementById('email').value,
-                        senha: document.getElementById('senha').value,
-                        tipo: document.getElementById('tipo').value
-                    });
-                    window.location.href = '/index.html';
-                } catch (erro) {
-                    msgErro.textContent = erro.message;
-                    msgErro.style.display = 'block';
-                }
-            });
-
-            const selectTipo = document.getElementById('tipo');
-            const dicaTipo = document.getElementById('dica-tipo');
-            const dicas = {
-                'Doador Comum': 'Você poderá registrar doações de alimentos, roupas, higiene, móveis e dinheiro.',
-                Empresa: 'Sua empresa aparece no ranking de doações do dashboard e no registro de estoque.',
-                Beneficiário: 'Você terá acesso às abas para solicitar doações disponíveis e acompanhar seus pedidos.'
-            };
-
-            function atualizarDica() {
-                dicaTipo.textContent = dicas[selectTipo.value] || '';
-            }
-
-            selectTipo.addEventListener('change', atualizarDica);
-            atualizarDica();
-        </script>
+        <script src="/assets/js/cadastro.js"></script>
+        <script src="/assets/js/tradutor.js"></script>
     </body>
 </html>

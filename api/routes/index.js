@@ -5,8 +5,11 @@
 const { Router } = require('express');
 
 const authRoutes = require('./auth.routes');
-const doacoesRoutes = require('./doacoes.routes');
+const estoqueRoutes = require('./estoque.routes');
 const pedidosRoutes = require('./pedidos.routes');
+const dashboardRoutes = require('./dashboard.routes');
+const locaisRoutes = require('./locais.routes');
+const empresaRoutes = require('./empresa.routes');
 
 const rotas = Router();
 
@@ -20,10 +23,13 @@ rotas.get('/status', (req, res) => {
 });
 
 rotas.use('/auth', authRoutes); // /api/auth/*
-rotas.use('/doacoes', doacoesRoutes); // /api/doacoes/*
-// Alias: o frontend consome /api/estoque (doações registradas no estoque — RN01)
-rotas.use('/estoque', doacoesRoutes); // /api/estoque/*
+// Nome principal usado pelo frontend (estoque.html, receber.html)
+rotas.use('/estoque', estoqueRoutes); // /api/estoque/*
+// Alias: /api/doacoes aponta para o mesmo módulo de estoque
+rotas.use('/doacoes', estoqueRoutes); // /api/doacoes/*
 rotas.use('/pedidos', pedidosRoutes); // /api/pedidos/*
-// TODO futuro: rotas.use('/dashboard', dashboardRoutes) — GET /api/dashboard
+rotas.use('/dashboard', dashboardRoutes); // GET /api/dashboard
+rotas.use('/locais', locaisRoutes); // GET e POST /api/locais
+rotas.use('/empresa', empresaRoutes); // GET /api/empresa/solicitacoes
 
 module.exports = rotas;

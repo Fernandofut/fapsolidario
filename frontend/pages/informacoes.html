@@ -3,58 +3,180 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Informações - FAP Solidário</title>
-        <link rel="stylesheet" href="/assets/css/style_info.css" />
+        <title>Informações - FAP SOLIDÁRIO</title>
+        <link rel="stylesheet" href="/assets/css/listing.css" />
     </head>
     <body>
-        <main class="container-info">
-            <header class="header-banner">
-                <h1 class="titulo-pagina">INFORMAÇÕES</h1>
+    <div class="seletor-idioma">
+      <button type="button" class="btn-lang active" data-lang="pt">PT</button>
+      <button type="button" class="btn-lang" data-lang="en">EN</button>
+      <button type="button" class="btn-lang" data-lang="es">ES</button>
+    </div>
+        <div class="main-container">
+            <!-- Menu de navegação institucional -->
+            <nav class="category-nav" aria-label="Navegação institucional">
+                <a href="/pages/opcoes.html" class="cat-pill">Menu Principal</a>
+                <a href="/pages/doar.html" class="cat-pill">Fazer Doação</a>
+                <a href="/pages/estoque.html" class="cat-pill">Estoque</a>
+                <a href="/pages/dashboard.html" class="cat-pill">Dashboard</a>
+                <a href="/pages/informacoes.html" class="cat-pill active">ℹ️ Informações</a>
+            </nav>
+
+            <!-- Cabeçalho institucional -->
+            <header class="page-header">
+                <h1 class="page-title">INFORMAÇÕES E CONTATO ℹ️</h1>
+                <p class="page-subtitle">
+                    Canais oficiais de atendimento, equipe de suporte e localização da sede do projeto FAP SOLIDÁRIO em Barra do Garças - MT.
+                </p>
             </header>
 
-            <section class="painel-conteudo">
-                <div class="card-info">
-                    <h2>Telefone e e-mail para Contato:</h2>
-                    <div class="box-contatos">
-                        <p>📞 (66) 9908-2118</p>
-                        <p>📞 (66) 99281-2660</p>
-                        <p>📞 (66) 99258-3264</p>
-                        <p class="email">📧 fernando.n@estudante.ifmt.edu.br</p>
+            <!-- Grid de informações -->
+            <div class="items-grid grid-2">
+                <!-- Card de Contatos -->
+                <div class="info-card">
+                    <div class="card-header-top">
+                        <span class="card-badge">📞 Atendimento &amp; Suporte</span>
+                    </div>
+                    <h2 class="card-title">Canais de Contato</h2>
+                    <p class="card-desc">Entre em contato com nossa equipe para tirar dúvidas sobre doações, cadastro de entidades ou parcerias institucionais:</p>
+
+                    <div style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 20px;">
+                        <div class="card-contacts-actions" style="margin-bottom: 0;">
+                            <a href="tel:556699082118" class="btn-contact-action btn-call" title="Ligar para Suporte (66) 9908-2118">
+                                <span class="contact-icon">📞</span>
+                                <span class="contact-text">(66) 9908-2118</span>
+                            </a>
+                            <a href="https://wa.me/556699082118?text=Ol%C3%A1!%20Vim%20atrav%C3%A9s%20do%20FAP%20Solid%C3%A1rio%20e%20gostaria%20de%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener noreferrer" class="btn-contact-action btn-whatsapp" title="Conversar no WhatsApp">
+                                <svg class="whatsapp-icon" viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 15 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67M9.53 7.53C9.36 7.53 9.09 7.6 8.87 7.84C8.65 8.08 8.02 8.67 8.02 9.87C8.02 11.07 8.9 12.23 9.02 12.39C9.14 12.55 10.76 15.05 13.25 16.12C13.84 16.38 14.3 16.53 14.66 16.65C15.26 16.84 15.8 16.81 16.23 16.75C16.71 16.68 17.7 16.15 17.91 15.57C18.12 14.99 18.12 14.49 18.06 14.39C18 14.29 17.83 14.23 17.57 14.1C17.32 13.98 16.08 13.37 15.85 13.29C15.62 13.2 15.46 13.16 15.29 13.41C15.13 13.65 14.65 14.23 14.5 14.41C14.36 14.58 14.21 14.6 13.96 14.48C13.71 14.35 12.9 14.09 11.94 13.23C11.19 12.56 10.68 11.73 10.54 11.48C10.39 11.24 10.52 11.11 10.65 10.98C10.76 10.87 10.9 10.69 11.02 10.55C11.15 10.4 11.19 10.3 11.27 10.13C11.35 9.97 11.31 9.82 11.25 9.7C11.19 9.58 10.72 8.42 10.52 7.94C10.33 7.48 10.13 7.54 9.98 7.53H9.53Z"/></svg>
+                                <span class="contact-text">WhatsApp</span>
+                            </a>
+                        </div>
+
+                        <div class="card-contacts-actions" style="margin-bottom: 0;">
+                            <a href="tel:5566992812660" class="btn-contact-action btn-call" title="Ligar para Suporte (66) 99281-2660">
+                                <span class="contact-icon">📞</span>
+                                <span class="contact-text">(66) 99281-2660</span>
+                            </a>
+                            <a href="https://wa.me/5566992812660?text=Ol%C3%A1!%20Vim%20atrav%C3%A9s%20do%20FAP%20Solid%C3%A1rio%20e%20gostaria%20de%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener noreferrer" class="btn-contact-action btn-whatsapp" title="Conversar no WhatsApp">
+                                <svg class="whatsapp-icon" viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 15 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67M9.53 7.53C9.36 7.53 9.09 7.6 8.87 7.84C8.65 8.08 8.02 8.67 8.02 9.87C8.02 11.07 8.9 12.23 9.02 12.39C9.14 12.55 10.76 15.05 13.25 16.12C13.84 16.38 14.3 16.53 14.66 16.65C15.26 16.84 15.8 16.81 16.23 16.75C16.71 16.68 17.7 16.15 17.91 15.57C18.12 14.99 18.12 14.49 18.06 14.39C18 14.29 17.83 14.23 17.57 14.1C17.32 13.98 16.08 13.37 15.85 13.29C15.62 13.2 15.46 13.16 15.29 13.41C15.13 13.65 14.65 14.23 14.5 14.41C14.36 14.58 14.21 14.6 13.96 14.48C13.71 14.35 12.9 14.09 11.94 13.23C11.19 12.56 10.68 11.73 10.54 11.48C10.39 11.24 10.52 11.11 10.65 10.98C10.76 10.87 10.9 10.69 11.02 10.55C11.15 10.4 11.19 10.3 11.27 10.13C11.35 9.97 11.31 9.82 11.25 9.7C11.19 9.58 10.72 8.42 10.52 7.94C10.33 7.48 10.13 7.54 9.98 7.53H9.53Z"/></svg>
+                                <span class="contact-text">WhatsApp</span>
+                            </a>
+                        </div>
+
+                        <div class="card-contacts-actions" style="margin-bottom: 0;">
+                            <a href="tel:5566992583264" class="btn-contact-action btn-call" title="Ligar para Suporte (66) 99258-3264">
+                                <span class="contact-icon">📞</span>
+                                <span class="contact-text">(66) 99258-3264</span>
+                            </a>
+                            <a href="https://wa.me/5566992583264?text=Ol%C3%A1!%20Vim%20atrav%C3%A9s%20do%20FAP%20Solid%C3%A1rio%20e%20gostaria%20de%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener noreferrer" class="btn-contact-action btn-whatsapp" title="Conversar no WhatsApp">
+                                <svg class="whatsapp-icon" viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 15 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67M9.53 7.53C9.36 7.53 9.09 7.6 8.87 7.84C8.65 8.08 8.02 8.67 8.02 9.87C8.02 11.07 8.9 12.23 9.02 12.39C9.14 12.55 10.76 15.05 13.25 16.12C13.84 16.38 14.3 16.53 14.66 16.65C15.26 16.84 15.8 16.81 16.23 16.75C16.71 16.68 17.7 16.15 17.91 15.57C18.12 14.99 18.12 14.49 18.06 14.39C18 14.29 17.83 14.23 17.57 14.1C17.32 13.98 16.08 13.37 15.85 13.29C15.62 13.2 15.46 13.16 15.29 13.41C15.13 13.65 14.65 14.23 14.5 14.41C14.36 14.58 14.21 14.6 13.96 14.48C13.71 14.35 12.9 14.09 11.94 13.23C11.19 12.56 10.68 11.73 10.54 11.48C10.39 11.24 10.52 11.11 10.65 10.98C10.76 10.87 10.9 10.69 11.02 10.55C11.15 10.4 11.19 10.3 11.27 10.13C11.35 9.97 11.31 9.82 11.25 9.7C11.19 9.58 10.72 8.42 10.52 7.94C10.33 7.48 10.13 7.54 9.98 7.53H9.53Z"/></svg>
+                                <span class="contact-text">WhatsApp</span>
+                            </a>
+                        </div>
+
+                        <a href="mailto:fernando.n@estudante.ifmt.edu.br" class="card-contact" style="margin-bottom: 0; background: #eff6ff; color: #1d4ed8; border-color: #bfdbfe; font-size: 0.88rem;">
+                            📧 fernando.n@estudante.ifmt.edu.br
+                        </a>
                     </div>
                 </div>
 
-                <hr class="divisor-amarelo" />
-
-                <div class="card-info">
-                    <h2>Localização da Sede do Aplicativo:</h2>
-                    <p class="endereco">
-                        Instituto de Educação, Ciência e Tecnologia de Mato Grosso<br />campus Barra do Garças
+                <!-- Card de Localização da Sede -->
+                <div class="info-card">
+                    <div class="card-header-top">
+                        <span class="card-badge">🏫 Sede Institucional</span>
+                    </div>
+                    <h2 class="card-title">IFMT - Campus Barra do Garças</h2>
+                    <p class="card-desc">
+                        Instituto Federal de Educação, Ciência e Tecnologia de Mato Grosso — Polo de desenvolvimento e coordenação do FAP SOLIDÁRIO.
                     </p>
 
-                    <div class="mapa-container">
+                    <div class="card-address-wrapper">
+                        <span class="card-address-text" title="IFMT - Campus Barra do Garças, Barra do Garças - MT">
+                            📍 IFMT - Campus Barra do Garças, Barra do Garças - MT
+                        </span>
+                        <button
+                            type="button"
+                            class="btn-copy-address"
+                            data-endereco="IFMT - Campus Barra do Garças, Barra do Garças - MT"
+                            title="Copiar morada para o Waze, Google Maps ou GPS"
+                        >
+                            <svg class="copy-icon" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                                <path d="M16 1H4C2.9 1 2 1.9 2 3V17H4V3H16V1ZM19 5H8C6.9 5 6 5.9 6 7V21C6 22.1 6.9 23 8 23H19C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19 5ZM19 21H8V7H19V21Z"/>
+                            </svg>
+                            <span class="copy-text">Copiar</span>
+                        </button>
+                    </div>
+
+                    <div class="map-container">
                         <iframe
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3837.660766133724!2d-52.303283273981585!3d-15.874417084777178!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93656899a6e18d89%3A0x4b3904c7cfdae71!2sIFMT%20-%20Campus%20Barra%20Do%20Garcas!5e0!3m2!1spt-BR!2sbr!4v1778591521283!5m2!1spt-BR!2sbr"
-                            width="100%"
-                            height="200"
                             style="border: 0"
                             allowfullscreen=""
                             loading="lazy"
                             referrerpolicy="no-referrer-when-downgrade"
-                        >
-                        </iframe>
+                            title="Localização do IFMT Campus Barra do Garças"
+                        ></iframe>
                     </div>
-                    <a href="https://maps.app.goo.gl/DNKFGnirgTdLuU9d9" target="_blank" class="link-maps"
-                        >Abrir no Google Maps →</a
-                    >
+
+                    <div style="margin-top: 14px; text-align: right;">
+                        <a href="https://maps.app.goo.gl/DNKFGnirgTdLuU9d9" target="_blank" rel="noopener noreferrer" style="color: var(--primary-blue); font-weight: 700; text-decoration: none; font-size: 0.88rem;">
+                            Abrir no Google Maps ↗
+                        </a>
+                    </div>
                 </div>
+            </div>
+
+            <!-- Instituições e pontos de coleta cadastrados (dinâmico via /api/locais) -->
+            <section class="section-header" aria-labelledby="titulo-locais-cadastrados">
+                <h2 class="section-title" id="titulo-locais-cadastrados">INSTITUIÇÕES E PONTOS DE COLETA</h2>
             </section>
 
-            <a href="/pages/menu.html" class="btn-voltar">
-                <span>VOLTAR</span>
-                <div class="circulo-seta">←</div>
-            </a>
-        </main>
+            <div class="search-bar-container">
+                <div class="search-input-wrapper">
+                    <span class="search-icon" aria-hidden="true">🔍</span>
+                    <input
+                        type="search"
+                        id="filtro-locais"
+                        class="search-input"
+                        placeholder="Buscar por instituição, endereço ou bairro..."
+                        autocomplete="off"
+                        aria-label="Filtrar instituições e pontos de coleta"
+                    />
+                    <button
+                        type="button"
+                        id="btn-limpar-busca"
+                        class="btn-clear-search"
+                        title="Limpar busca"
+                        aria-label="Limpar busca"
+                        style="display: none"
+                    >
+                        ✕
+                    </button>
+                </div>
+            </div>
+
+            <div class="items-grid" id="lista-locais"></div>
+
+            <!-- Rodapé e links de navegação padronizados -->
+            <footer class="page-footer">
+                <a href="/pages/menu.html" class="btn-back">
+                    <span>←</span>
+                    <span>VOLTAR</span>
+                </a>
+                <div class="secondary-links">
+                    <a href="/pages/doar.html">Categorias de Doação</a>
+                    <span class="sep">•</span>
+                    <a href="/pages/estoque.html">Estoque</a>
+                    <span class="sep">•</span>
+                    <a href="/pages/dashboard.html">Dashboard</a>
+                </div>
+            </footer>
+        </div>
 
         <script src="/assets/js/api.js"></script>
-    </body>
+        <script src="/assets/js/locais.js"></script>
+        <script src="/assets/js/ui.js"></script>
+        <script src="/assets/js/informacoes.js"></script>
+        <script src="/assets/js/tradutor.js"></script>
+</body>
 </html>

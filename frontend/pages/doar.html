@@ -3,63 +3,106 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>FAP Solidário - Escolha sua Doação</title>
-        <link rel="stylesheet" href="/assets/css/styledoar.css" />
+        <title>FAP SOLIDÁRIO - Escolha sua Doação</title>
+        <link rel="stylesheet" href="/assets/css/listing.css" />
     </head>
     <body>
-        <main class="menu-container">
-            <header>
-                <h1 class="titulo-receber">DOAR</h1>
+    <div class="seletor-idioma">
+      <button type="button" class="btn-lang active" data-lang="pt">PT</button>
+      <button type="button" class="btn-lang" data-lang="en">EN</button>
+      <button type="button" class="btn-lang" data-lang="es">ES</button>
+    </div>
+        <div class="main-container">
+            <!-- Menu de navegação entre categorias -->
+            <nav class="category-nav" aria-label="Categorias de doação">
+                <a href="/pages/doar.html" class="cat-pill active">Todas as Doações</a>
+                <a href="/pages/roupas.html" class="cat-pill">👕 Roupas</a>
+                <a href="/pages/alimentos.html" class="cat-pill">🥪 Alimentos</a>
+                <a href="/pages/moveisehigiene.html" class="cat-pill">🧼 Higiene &amp; Móveis</a>
+                <a href="/pages/dinheiro.html" class="cat-pill">💰 Dinheiro</a>
+            </nav>
+
+            <!-- Cabeçalho institucional -->
+            <header class="page-header">
+                <h1 class="page-title">ESCOLHA COMO DOAR 🤝</h1>
+                <p class="page-subtitle">
+                    Selecione a categoria desejada para encontrar pontos de coleta, contatos telefônicos e mapas de localização das instituições parceiras em Barra do Garças.
+                </p>
             </header>
 
-            <nav class="grade-botoes">
-                <a href="/pages/roupas.html" class="botao-opcao">
-                    <span>DOAR ROUPAS E ACESSÓRIOS</span>
-                    <span class="emoji">👕</span>
+            <!-- Grid responsivo de categorias de doação -->
+            <div class="donation-grid">
+                <a href="/pages/roupas.html" class="donation-card">
+                    <div class="donation-icon-wrapper">
+                        <span>👕</span>
+                    </div>
+                    <h2 class="donation-card-title">Roupas e Acessórios</h2>
+                    <p class="donation-card-desc">Agasalhos, roupas infantis e adultas, calçados e cobertores em bom estado.</p>
+                    <span class="donation-card-action">Ver locais de coleta →</span>
                 </a>
 
-                <a href="/pages/alimentos.html" class="botao-opcao">
-                    <span>ALIMENTOS NÃO PERECÍVEIS</span>
-                    <span class="emoji">🍎</span>
+                <a href="/pages/alimentos.html" class="donation-card">
+                    <div class="donation-icon-wrapper">
+                        <span>🍎</span>
+                    </div>
+                    <h2 class="donation-card-title">Alimentos Não Perecíveis</h2>
+                    <p class="donation-card-desc">Arroz, feijão, óleo, leite em pó, café, macarrão e cestas básicas completas.</p>
+                    <span class="donation-card-action">Ver locais de coleta →</span>
                 </a>
 
-                <a href="/pages/moveisehigiene.html" class="botao-opcao">
-                    <span>ITENS CULTURAIS</span>
-                    <span class="emoji">📚</span>
+                <a href="/pages/moveisehigiene.html#higiene" class="donation-card">
+                    <div class="donation-icon-wrapper">
+                        <span>🧼</span>
+                    </div>
+                    <h2 class="donation-card-title">Itens de Higiene</h2>
+                    <p class="donation-card-desc">Sabonetes, cremes dentais, escovas, fraldas infantis e geriátricas, e produtos de limpeza.</p>
+                    <span class="donation-card-action">Ver locais de coleta →</span>
                 </a>
 
-                <a href="/pages/moveisehigiene.html" class="botao-opcao">
-                    <span>DOAR MÓVEIS</span>
-                    <span class="emoji">🪑</span>
+                <a href="/pages/moveisehigiene.html#moveis" class="donation-card">
+                    <div class="donation-icon-wrapper">
+                        <span>🪑</span>
+                    </div>
+                    <h2 class="donation-card-title">Móveis e Utensílios</h2>
+                    <p class="donation-card-desc">Camas, colchões, mesas, cadeiras, fogões, geladeiras e utilidades domésticas.</p>
+                    <span class="donation-card-action">Ver locais de coleta →</span>
                 </a>
 
-                <a href="/pages/moveisehigiene.html" class="botao-opcao">
-                    <span>ITENS DE HIGIENE</span>
-                    <span class="emoji">🧼</span>
+                <a href="/pages/moveisehigiene.html" class="donation-card">
+                    <div class="donation-icon-wrapper">
+                        <span>📚</span>
+                    </div>
+                    <h2 class="donation-card-title">Itens Culturais e Livros</h2>
+                    <p class="donation-card-desc">Livros literários, materiais escolares, brinquedos educativos e instrumentos.</p>
+                    <span class="donation-card-action">Ver locais de coleta →</span>
                 </a>
 
-                <a href="/pages/dinheiro.html" class="botao-opcao">
-                    <span>DOAR DINHEIRO</span>
-                    <span class="emoji">💰</span>
+                <a href="/pages/dinheiro.html" class="donation-card">
+                    <div class="donation-icon-wrapper">
+                        <span>💰</span>
+                    </div>
+                    <h2 class="donation-card-title">Doações Financeiras</h2>
+                    <p class="donation-card-desc">Contribuições via PIX e transferência bancária direta para as entidades credenciadas.</p>
+                    <span class="donation-card-action">Ver chaves e dados →</span>
                 </a>
-            </nav>
-            <br />
-            <a href="/pages/menu.html" class="btn-voltar-home">VOLTAR</a>
-            <div style="text-align: center; margin-top: 10px">
-                <a
-                    href="/pages/estoque.html"
-                    style="color: #667eea; text-decoration: none; font-size: 0.85rem; font-weight: 600"
-                    >Estoque</a
-                >
-                &nbsp;|&nbsp;
-                <a
-                    href="/pages/dashboard.html"
-                    style="color: #667eea; text-decoration: none; font-size: 0.85rem; font-weight: 600"
-                    >Dashboard</a
-                >
             </div>
-        </main>
+
+            <!-- Rodapé e links de navegação padronizados -->
+            <footer class="page-footer">
+                <a href="/pages/menu.html" class="btn-back">
+                    <span>←</span>
+                    <span>VOLTAR</span>
+                </a>
+                <div class="secondary-links">
+                    <a href="/pages/estoque.html">Estoque de Doações</a>
+                    <span class="sep">•</span>
+                    <a href="/pages/dashboard.html">Dashboard Analítico</a>
+                </div>
+            </footer>
+        </div>
 
         <script src="/assets/js/api.js"></script>
-    </body>
+        <script src="/assets/js/ui.js"></script>
+        <script src="/assets/js/tradutor.js"></script>
+</body>
 </html>

@@ -14,7 +14,7 @@ window.FAP = (() => {
     const PAGINAS_RECEBEDOR = ['/pages/receber.html'];
 
     async function requisitar(metodo, caminho, corpo) {
-        const opcoes = { method: metodo, headers: {} };
+        const opcoes = { method: metodo, headers: {}, credentials: 'include' };
         if (corpo !== undefined) {
             opcoes.headers['Content-Type'] = 'application/json';
             opcoes.body = JSON.stringify(corpo);

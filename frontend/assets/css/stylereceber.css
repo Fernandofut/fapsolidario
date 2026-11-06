@@ -1,8 +1,10 @@
+@import url('/assets/css/design-system.css');
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
 body {
@@ -19,6 +21,7 @@ body {
     border-radius: 16px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
     padding: 35px;
+    overflow-x: hidden;
 }
 
 .topo {
@@ -138,7 +141,7 @@ body {
     padding: 10px;
     border: none;
     border-radius: 8px;
-    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    background: linear-gradient(135deg, #5bbd5e 0%, #4ca84f 100%);
     color: #fff;
     font-weight: 700;
     font-size: 0.88rem;
@@ -181,6 +184,40 @@ body {
 
 .tabela tbody tr:hover {
     background: #f7f9fc;
+}
+
+.status-pedido {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    line-height: 1.3;
+    white-space: nowrap;
+}
+
+.status-pendente {
+    background: #fff7d6;
+    color: #8a6d00;
+    border: 1px solid #f1db0c;
+}
+
+.status-concluido {
+    background: #e6f7ea;
+    color: #237a3b;
+    border: 1px solid #5bbd5e;
+}
+
+.status-cancelado {
+    background: #fdecec;
+    color: #b42318;
+    border: 1px solid #f5b5b1;
+}
+
+.status-neutro {
+    background: #eef1f5;
+    color: #555;
+    border: 1px solid #d6dbe3;
 }
 
 .vazio {
@@ -282,8 +319,14 @@ body {
 }
 
 .btn-confirmar {
-    background: linear-gradient(135deg, #43e97b, #38f9d7);
+    background: linear-gradient(135deg, #5bbd5e, #4ca84f);
     color: #fff;
+}
+
+.btn-confirmar:disabled,
+.btn-cancelar:disabled {
+    opacity: 0.65;
+    cursor: wait;
 }
 
 .btn-cancelar {
@@ -319,11 +362,149 @@ body {
     transform: translateX(-50%) translateY(0);
 }
 
-@media (max-width: 600px) {
+@media (max-width: 1024px) {
     .painel {
-        padding: 22px;
+        padding: 28px;
     }
+
+    .grade-itens {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
     .titulo-painel {
-        font-size: 1.3rem;
+        font-size: 1.5rem;
     }
+
+    .btn-sair {
+        min-height: 44px;
+    }
+
+    .aba {
+        min-height: 44px;
+    }
+
+    .table-responsive .tabela {
+        min-width: 640px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 16px 10px 28px;
+    }
+
+    .painel {
+        padding: 18px 14px;
+        border-radius: 14px;
+    }
+
+    .topo {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .topo > .lang-switcher {
+        align-self: flex-end;
+        margin-left: 0;
+    }
+
+    .titulo-painel {
+        font-size: 1.25rem;
+        letter-spacing: 1px;
+        line-height: 1.25;
+    }
+
+    .btn-sair {
+        width: 100%;
+        min-height: 44px;
+        text-align: center;
+    }
+
+    .abas {
+        gap: 6px;
+    }
+
+    .aba {
+        flex: 1 1 140px;
+        min-height: 44px;
+        padding: 10px 12px;
+        font-size: 0.78rem;
+    }
+
+    .grade-itens {
+        grid-template-columns: 1fr;
+    }
+
+    .card-item {
+        padding: 16px;
+    }
+
+    .btn-solicitar {
+        min-height: 44px;
+    }
+
+    .table-responsive .tabela {
+        min-width: 620px;
+    }
+
+    .modal-box {
+        width: calc(100% - 24px);
+        max-height: 90vh;
+        padding: 20px;
+        overflow-y: auto;
+    }
+
+    .modal-botoes {
+        flex-direction: column;
+    }
+
+    .modal-botoes button {
+        width: 100%;
+        min-height: 44px;
+    }
+
+    .toast {
+        width: calc(100% - 32px);
+        max-width: none;
+        padding: 12px 18px;
+    }
+}
+
+
+/* === Seletor de Idiomas (PT | EN | ES) === */
+.seletor-idioma {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  z-index: 9999;
+  display: flex;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 4px;
+  border-radius: 20px;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.btn-lang {
+  border: none;
+  background: transparent;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 15px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.8rem;
+  line-height: 1;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  transition: all 0.2s ease;
+}
+.btn-lang:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+.btn-lang.active {
+  background: #f1db0c;
+  color: #000;
+  text-shadow: none;
 }

@@ -3,14 +3,19 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>FAP Solidário - Menu do Doador</title>
+        <title>FAP SOLIDÁRIO - Menu do Doador</title>
         <link rel="stylesheet" href="/assets/css/style_home.css" />
     </head>
     <body>
+    <div class="seletor-idioma">
+      <button type="button" class="btn-lang active" data-lang="pt">PT</button>
+      <button type="button" class="btn-lang" data-lang="en">EN</button>
+      <button type="button" class="btn-lang" data-lang="es">ES</button>
+    </div>
         <div class="main-container">
             <section class="lado-esquerdo">
                 <div class="logo-container">
-                    <img src="/assets/img/fap.jpeg" alt="FAP Solidário Logo" class="logo-img" />
+                    <img src="/assets/img/fap.jpeg" alt="FAP SOLIDÁRIO Logo" class="logo-img" />
                 </div>
             </section>
 
@@ -36,30 +41,14 @@
 
                     <hr class="divisor" />
 
-                    <a
-                        href="#"
-                        onclick="
-                            FAP.sair();
-                            return false;
-                        "
-                        class="btn-sair"
-                        >SAIR DA CONTA</a
-                    >
+                    <a href="#" id="btn-sair" class="btn-sair">SAIR DA CONTA</a>
                 </div>
             </section>
         </div>
 
         <script src="/assets/js/api.js"></script>
-        <script>
-            fetch('/api/auth/sessao')
-                .then((r) => (r.ok ? r.json() : Promise.reject()))
-                .then((sessao) => {
-                    document.getElementById('boas-vindas').textContent =
-                        'Olá, ' + sessao.nome + ' (' + sessao.tipo + ') - Área do doador';
-                })
-                .catch(() => {
-                    window.location.href = '/index.html';
-                });
-        </script>
-    </body>
+        <script src="/assets/js/ui.js"></script>
+        <script src="/assets/js/opcoes.js"></script>
+        <script src="/assets/js/tradutor.js"></script>
+</body>
 </html>
