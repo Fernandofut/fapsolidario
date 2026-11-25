@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
         FAP.sair();
     });
 
+    /* Cores do gráfico lidas dos tokens do tema, com fallback para ambiente
+       sem os CSS carregados. */
     const cores = [
         '#667eea',
         '#764ba2',
@@ -12,12 +14,17 @@ document.addEventListener('DOMContentLoaded', () => {
         '#fccb90',
         '#4facfe',
         '#f5576c',
-        '#43e97b',
-        '#38f9d7',
-        '#e74c3c'
+        '#38f9d7'
     ];
     const selos = ['&#x1F947;', '&#x1F948;', '&#x1F949;'];
     let chartInstance = null;
+    let ultimasCats = [];
+    let ultimoRanking = [];
+
+    function corTema(nome, fallback) {
+        const valor = getComputedStyle(document.documentElement).getPropertyValue(nome).trim();
+        return valor || fallback;
+    }
 
     function escapeHtml(str) {
         if (!str) return '';
@@ -35,6 +42,8 @@ document.addEventListener('DOMContentLoaded', () => {
             .then((dados) => {
                 const cats = dados.categorias || [];
                 const ranking = dados.ranking || [];
+                ultimasCats = cats;
+                ultimoRanking = ranking;
 
                 let totalQtd = 0;
                 cats.forEach((c) => (totalQtd += c.total));
@@ -74,7 +83,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const labels = cats.map((c) => c.categoria);
         const valores = cats.map((c) => c.total);
-        const coresChart = cats.map((_, i) => cores[i % cores.length]);
+        const coresChart = cats.map((_, i) =>
+            corTema('--chart-' + ((i % cores.length) + 1), cores[i % cores.length])
+        );
 
         if (chartInstance) chartInstance.destroy();
 
@@ -86,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     {
                         data: valores,
                         backgroundColor: coresChart,
-                        borderColor: '#fff',
+                        borderColor: corTema('--surface', '#ffffff'),
                         borderWidth: 2
                     }
                 ]
@@ -95,7 +106,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 responsive: true,
                 maintainAspectRatio: true,
                 plugins: {
-                    legend: { position: 'bottom', labels: { padding: 15, font: { size: 12 } } }
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 15,
+                            color: corTema('--text', '#334155'),
+                            font: { size: 12 }
+                        }
+                    }
                 }
             }
         });
@@ -109,11 +127,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         let html = '';
         ranking.forEach((emp, i) => {
-            const selo = i < 3 ? selos[i] : '<span style="color:#aaa">#' + (i + 1) + '</span>';
-            const bg = i === 0 ? '#fff9e6' : i === 1 ? '#f5f5f5' : i === 2 ? '#fdf0e6' : '';
+            const selo = i < 3 ? selos[i] : '<span class="ranking-num">#' + (i + 1) + '</span>';
+            const destaque = i < 3 ? ' ranking-item--' + (i + 1) : '';
             html +=
-                '<li style="background:' +
-                bg +
+                '<li class="ranking-item' +
+                destaque +
                 '">' +
                 '<span class="ranking-pos">' +
                 selo +
@@ -127,6 +145,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 '</li>';
         });
         lista.innerHTML = html;
+    }
+
+    if (window.FAPTema && typeof window.FAPTema.aoMudar === 'function') {
+        window.FAPTema.aoMudar(() => {
+            if (ultimasCats.length) renderizarPizza(ultimasCats);
+            if (ultimoRanking.length) renderizarRanking(ultimoRanking);
+        });
     }
 
     carregarDashboard();

@@ -179,7 +179,7 @@ window.LocaisSolidarios = (() => {
                             <span class="contact-text">WhatsApp</span>
                         </a>
                     ` : `
-                        <span class="card-contact" style="background: #f1f5f9; color: #64748b; border-color: #cbd5e1;">
+                        <span class="card-contact card-contact--presencial">
                             📞 Contato presencial
                         </span>
                     `}
